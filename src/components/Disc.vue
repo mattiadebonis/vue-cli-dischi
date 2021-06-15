@@ -5,7 +5,6 @@
         <h2>{{ item.title }}</h2>
         <h3>{{ item.autor}}</h3>
         <h3>{{ item.year}}</h3>
-
     </div>
 </template>
 
@@ -20,8 +19,23 @@ export default {
 </script>
 
 <style lang="scss">
+    @import "../assets/styles/variables";
+
     .disc{
         width: calc(100%/5);
+        background-color: $light-color;
+        color: white;
+        margin:  20px;
+        
+        img{
+            width: 200px;
+        }
+        h2{
+            font-size: 22px;
+        }
+        h2{
+            font-size: 18px;
+        }
     }
 
 </style>

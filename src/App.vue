@@ -1,7 +1,14 @@
 <template>
   <div id="app">
-    <Header :genres="allGenres" />    
-    <Main @genresReady="setGenres" />
+    <Header 
+      :genres="allGenres"
+      @changedGenre = "updateSelectedGenre"
+      
+    />    
+    <Main 
+      :selectedGenre="currentGenre"   
+      @genresReady="setGenres"  
+    />
 
 
   </div>
@@ -15,14 +22,24 @@ export default {
   name: 'App',
   data: function(){
     return {
-      allGenres: []
+      allGenres: [],
+      currentGenre: []
     }
 
   },
   methods:{
     setGenres: function(array){
-      this.allGenrs = array;
+      this.allGenres = array;
+      console.log(this.allGenres)
+    },
+
+    updateSelectedGenre: function(newGenre){
+      this.selectedGenre = newGenre;
+      
     }
+
+
+
   },
   components: {
     Header,

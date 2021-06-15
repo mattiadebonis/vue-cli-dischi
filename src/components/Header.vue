@@ -1,13 +1,22 @@
 <template>
     <header class="d-flex justify-content-between px-3">
         <div>
-            <img src="" alt="Logo Spotify">
+            <img src="../assets/img/spotify.png" alt="Logo Spotify">
         </div>
         <div>
-            <select value="">
+            
+            <select 
+                value=""
+                v-model="selectedGenre"
+                @change= "$emit('changedGenre',selectedGenre)"
+            >
                 <option value="">Seleziona un genere</option>
-                <option v-for="(genre, index) in genres" :key="index" :value="genre">
-                    {{genre}}    
+                <option 
+                    v-for="(genre, index) in genres" 
+                    :key="index"
+                    :value="genre"
+                >
+                    {{ genre }}    
                 </option>
             </select>
         </div>
@@ -23,28 +32,28 @@
 export default {
     name: "Header",
     props:{
-        "genres" : Array
+        "genres" : Array,
     }
 }
 
 </script>
 
 <style lang="scss">
-@import "../assets/styles/variables";
+    @import "../assets/styles/variables";
 
-header{
-    height: 70px;
-    line-height: 70px;
-    background-color: $light-color;
+    header{
+        height: 70px;
+        line-height: 70px;
+        background-color: $light-color;
 
-    img{
+        img{
+            width: 50px;
 
-
+        }
+        
+        select{
+            padding: 5px;
+        }
     }
-    
-    select{
-        padding: 5px;
-    }
-}
 
 </style>

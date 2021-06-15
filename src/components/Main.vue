@@ -2,7 +2,12 @@
     <main class="container mt-5">
 
         <div class="d-flex flex-wrap">
-            <Disc v-for="(disc,index) in discs" :key="index" />
+            <Disc
+                v-for="(disc,index) in filteredDiscs "
+                :key="index"
+                :item= "disc"
+            />
+            
         </div>
 
     </main>
@@ -17,9 +22,14 @@ import Disc from "./Disc.vue";
 
 export default {
     name :"Main",
+    props: {
+        "selectedGenre": String
+
+    },
     data: function(){
         return{
-            discs:[]
+            discs:[],
+            genres :[]
         }
     },
     created: function(){
@@ -27,16 +37,16 @@ export default {
             .get("https://flynn.boolean.careers/exercises/api/array/music")
             .then(
                 res=>{
-                    console.log(res)
                     this.discs = res.data.response;
                     this.discs.forEach(
                         (element) => {
-                            if(!this.genres.include(element.genre)){
+                            
+                            if(!this.genres.includes(element.genre)){
                                 this.genres.push(element.genre);
                             }
                         }
                     );
-                    this.$emit("genresReady", this.genres)
+                    this.$emit("genresReady", this.genres);                  
                 }
             )
             .catch(
@@ -45,7 +55,17 @@ export default {
                 }
             );
     },
+    computed:{
+        filteredDiscs : function(){
+            if(this.selectedGenre == ""){
+                return this.discs;
+            }
 
+            return this.discs.filter(
+                element => element.genre == this.selectedGenre
+            );
+        }
+    },
     components: {
         Disc
     }

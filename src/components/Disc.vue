@@ -1,19 +1,17 @@
 <template>
-    <div class="disc p-3 text-center mb-4">
-        
-        <img :src="item.poster" :alt="item.title" class="mb-3">
-        <h2>{{ item.title }}</h2>
-        <h3>{{ item.autor}}</h3>
-        <h3>{{ item.year}}</h3>
-    </div>
+  <div class="disc p-3 text-center">
+      <img :src="item.poster" :alt="item.title" class="mb-3">
+      <h2 class="mb-4">{{ item.title }}</h2>
+      <h3>{{ item.author }}</h3>
+      <h4>{{ item.year }}</h4>
+  </div>
 </template>
-
 
 <script>
 export default {
-    name : "Disc",
+    name: "Disc",
     props: {
-        item : Object
+        item: Object
     }
 }
 </script>

@@ -1,41 +1,62 @@
 <template>
-    <header class="d-flex justify-content-between px-3">
-        <div>
-            <img src="../assets/img/spotify.png" alt="Logo Spotify">
-        </div>
-        <div>
-            
-            <select 
-                value=""
-                v-model="selectedGenre"
-                @change= "$emit('changedGenre',selectedGenre)"
-            >
-                <option value="">Seleziona un genere</option>
-                <option 
-                    v-for="(genre, index) in genres" 
-                    :key="index"
-                    :value="genre"
-                >
-                    {{ genre }}    
-                </option>
-            </select>
-        </div>
+  <header class="d-flex justify-content-between px-3">
+      <div>
+          <img src="../assets/img/spotify.png" alt="Logo Spotify">
+      </div>
+      <div>
+          <select
+            v-model="selectedGenre"
+            @change="$emit('changedGenre', selectedGenre)"
+          >
+              <option value="">Seleziona un genere</option>
+              <option
+               v-for="(genre, index) in genres"
+               :key="index" 
+               :value="genre">
+                {{ genre }}
+              </option>
+          </select>
 
-    </header>
-
-
+          <select class="ms-2"
+             v-model="selectedAuthor"
+             @change="$emit('changedAuthor', selectedAuthor)"   
+          >
+              <option value="">Seleziona un autore</option>
+              <option 
+                v-for="(author, index) in authors"
+                :key="index"
+                :value="author">
+                {{ author }}
+              </option>
+          </select>
+      </div>
+  </header>
 </template>
 
-
 <script>
-
 export default {
     name: "Header",
-    props:{
-        "genres" : Array,
+    data: function() {
+        return {
+            selectedGenre: '',
+            selectedAuthor: ''
+        }
+    },
+    watch: {
+       appGenre: function(val) {
+           this.selectedGenre = val;
+       },
+        appAuthor: function(val) {
+           this.selectedAuthor = val;
+       }
+    },
+    props: {
+        "genres": Array,
+        "authors": Array,
+        "appGenre": String,
+        "appAuthor": String
     }
 }
-
 </script>
 
 <style lang="scss">

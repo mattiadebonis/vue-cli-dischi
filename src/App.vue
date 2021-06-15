@@ -1,45 +1,48 @@
 <template>
   <div id="app">
     <Header 
-      :genres="allGenres"
-      @changedGenre = "updateSelectedGenre"
-      
-    />    
-    <Main 
-      :selectedGenre="currentGenre"   
-      @genresReady="setGenres"  
+      :genres="allGenres" 
+      :authors="allAuthors"
+      :appGenre="currentGenre"
+      :appAuthor="currentAuthor"
+      @changedGenre="updateSelectedGenre" 
+      @changedAuthor="updateSelectedAuthor"
     />
 
-
+    <Main 
+      :selectedGenre="currentGenre"
+      :selectedAuthor="currentAuthor"
+      @dataReady="setData" 
+    />
   </div>
 </template>
 
 <script>
-import Header from "./components/Header.vue";
-import Main from "./components/Main.vue";
-
+import Header from './components/Header';
+import Main from './components/Main';
 export default {
   name: 'App',
-  data: function(){
+  data: function() {
     return {
       allGenres: [],
-      currentGenre: []
+      allAuthors: [],
+      currentGenre: '',
+      currentAuthor: ''
     }
-
   },
-  methods:{
-    setGenres: function(array){
-      this.allGenres = array;
-      console.log(this.allGenres)
+  methods: {
+    setData: function(genresArray, authorsArray) {
+      this.allGenres = genresArray;
+      this.allAuthors = authorsArray;
     },
-
-    updateSelectedGenre: function(newGenre){
-      this.selectedGenre = newGenre;
-      
+    updateSelectedGenre: function(newGenre) {
+      this.currentGenre = newGenre;
+      this.currentAuthor = "";
+    },
+    updateSelectedAuthor: function(newAuthor) {
+      this.currentAuthor = newAuthor;
+      this.currentGenre = "";
     }
-
-
-
   },
   components: {
     Header,
